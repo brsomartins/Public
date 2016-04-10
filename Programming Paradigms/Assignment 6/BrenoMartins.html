@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My page</title>
+		<style>
+			table, td, th {
+			    border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body style="background-color: silver">
+		<h1>Breno Martins' page</h1>
+
+		<img id="myPhoto" onclick="changeImage()" src="img1.jpg" alt="Breno's photo" style="width: 300px; float: left; margin-right: 10px">
+
+		<p>Hello! This is my page.</p>
+		<p>Check out my profile on LinkedIn: <a href="http://linkedin.com/in/brsomartins/en" target="_blank">click here</a>.</p>
+
+		<p id="pushPhraseInfo">Please push <button id="showInfo" type="button" onclick="showInfo()">this</button> to see more information about me.</p>
+		<p id="info" style="display: none">I was born in Rio de Janeiro, Brazil.</p>
+
+		<p id="pushPhraseTable">Please push <button id="showInfo" type="button" onclick="showTable()">this</button> to see my list of courses.</p>
+		<table id="table" style="display: none">
+			<tr>
+				<td>CSCE 3193</td>
+				<td>TuTh 11:00AM - 12:15PM</td>
+			</tr>
+			<tr>
+				<td>CSCE 3513</td>
+				<td>TuTh 2:00PM - 3:15PM</td>
+			</tr>
+			<tr>
+				<td>ELAC 2043</td>
+				<td>MoWe 10:45AM - 12:35PM</td>
+			</tr>
+			<tr>
+				<td>FINN 3003</td>
+				<td>MoWe 6:00PM - 7:15PM</td>
+			</tr>
+		</table> 
+
+		<script>
+			function changeImage() {
+			    var image = document.getElementById("myPhoto");
+			    if (image.src.match("1")) {
+			        image.src = "img2.jpg";
+			    } else {
+			        image.src = "img1.jpg";
+			    }
+			}
+
+			function showInfo() {
+				var info = document.getElementById("info");
+				if (info.style.display == "none") {
+					info.style.display = "block";
+					document.getElementById("pushPhraseInfo").innerHTML = "Please push <button id='showInfo' type='button' onclick='showInfo()'>this</button> to hide more information about me.";
+				} else {
+					info.style.display = "none";
+					document.getElementById("pushPhraseInfo").innerHTML = "Please push <button id='showInfo' type='button' onclick='showInfo()'>this</button> to see more information about me.";
+				}
+			}
+
+			function showTable() {
+				var table = document.getElementById("table");
+				if (table.style.display == "none") {
+					table.style.display = "table";
+					document.getElementById("pushPhraseTable").innerHTML = "Please push <button id='showInfo' type='button' onclick='showTable()'>this</button> to hide my list of courses.";
+				} else {
+					table.style.display = "none";
+					document.getElementById("pushPhraseTable").innerHTML = "Please push <button id='showInfo' type='button' onclick='showTable()'>this</button> to see my list of courses.";
+				}
+			}
+		</script>
+	</body>
+</html>

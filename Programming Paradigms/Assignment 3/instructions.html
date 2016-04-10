@@ -1,0 +1,91 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/3536/mod_resource/content/3/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="720"><tbody><tr><td>
+
+<h1>Assignment 3</h1>
+
+<p>For this assignment, you are asked to use your Student class from assignment 2 and create a GUI which presents the user with dialog windows for
+inputting information about a student. Once all of the grade information has been entered, your program must display a window which contains a graphics panel on which is drawn
+the student's letter grade for the course. You will need to read and learn about various GUI and <a href="http://docs.oracle.com/javase/7/docs/api/index.html?java/awt/Graphics.html">graphics</a> classes
+provided by Java, and this is intended to give you experience in learning API's. There are also some helpful examples in the lecture slides.
+(Specifically, the "GUI introduction" slides.)</p>
+
+<p>To show you what is expected, an example solution for this assignment, "Assignment3.jar" has been posted on the course site. To run it from the command line, type:
+</p><pre class="shell">java -jar Assignment3.jar
+</pre>
+Note that in some newer JDK versions, using some graphics cards with particular settings can cause standard Java UI elements to display incorrectly.  If you see partially missing text, disappearing text on buttons, etc., please try running Java with the command line option "-Dsun.java2d.d3d=false", similar to the following:
+<p></p><pre class="shell">java -Dsun.java2d.d3d=false -jar Assignment3.jar
+</pre>
+<p></p>
+
+<ol>
+	<li>Make a new copy of the files from Assignment 2.</li><br><br>
+
+	<li>In your student class, create a new function that will return just the letter grade for the course. You can make other modifications if you'd like, but make sure that it is still using Exam and Coursework objects.</li><br><br>
+
+	<li>Create a new class named Assignment3, which will first use a series of dialogs to prompt the user for all of the necessary information for a student:
+		<ol>
+			<li>First name</li>
+			<li>Last name</li>
+			<li>The number of graded activities</li>
+			<li>If there were n graded activities, prompt the user n times so he/she can enter each activity score</li>
+			<li>The number of graded homeworks</li>
+			<li>If there were n graded homeworks, prompt the user n times so he/she can enter each homework score</li>
+			<li>The score for the midterm</li>
+			<li>The letter grade for the midterm</li>
+			<li>The score for the final</li>
+			<li>The letter grade for the final</li>
+		</ol>
+	Your assignment should be run using the command "java Assignment3".
+	</li><br><br>
+	
+	<li>When reading in the values for the scores (and number of scores), you should use Integer.parseInt (google it for documentation about how it works) to get the integer value of the value entered by the user.  Note that Integer.parseInt throws an exception if given something other than a valid number.  If such an exception occurs, you must catch the exception and display a dialog saying "Invalid data entered. Exiting." and then the program should immediately exit.</li><br><br>
+
+	<li>A Student object should be created and all of that information should be used to calculate the student's letter grade for the course (just as in assignment 2).  All aspects of the grade calculation which were required for the previous assignment are required for this assignment, so make sure your code works and correct any bugs that existed in your last assignment.  Additionally, recall that in Java, when you want to compare the <b>contents</b> of two String objects, instead of using "==" you should use the "compareTo" method provided by the String class!</li><br><br>
+
+	<li>Finally, a JFrame object should be created which contains an instance of a panel class that you create (which should be in GradePanel.java and named GradePanel and will extend JPanel similar to the example DrawPanel class in section 4.14 of the book). The panel should display the letter grade for the student. If the letter grade is "A", then draw an "A" using Graphics.drawLine. Make your letter "A" fill up the window, such that it touches the top side and the two bottom corners, even if the window is resized. If the letter grade is "B", "C", "D", or "F", then display the grade using some standard font.</li><br>
+
+	<li>Submit a zip file in the usual manner. The zip file should contain exactly the source files Coursework.java, Exam.java, Student.java, GradePanel.java, Assignment3.java, and a working build script (build.bat or build.bash) which compiles and executes your program.
+		Do not submit any other files.<br><br></li>
+		
+<li>
+Here is the rubric the grader will use when running your program.  Make sure your code meets each of these requirements.  Please keep in mind that this is a very large class and the TA does not have time to fix your code, rename files, etc.:
+<ol>
+<li>-90%	Code does not compile</li>
+<li>-20% Incorrect files contained in the zip file</li>
+<li>-20% Build script does not correctly build and run your program</li>
+<li>-10% (each) missing dialog box (20% total if it doesn't correctly loop for the required number of activities and/or homeworks)</li>
+<li>-5%  Incorrect text on dialog box (prompts for wrong information)</li>
+<li>-10% If invalid value (i.e. non-integer) is entered, does not display "Invalid data entered. Exiting." then correctly exit</li>
+<li>-40% Missing panel with final grade</li>
+<li>-30% Final grade is displayed in a dialog rather than drawn on a panel</li>
+<li>-20% "A" is not drawn with lines</li>
+<li>-10% "A" does not expand or shrink to correctly fill resized window</li>
+<li>-10% "B","C", or "D" grade is not written with font</li>
+<li>-10% (each) Incorrect final grade</li>
+</ol>
+</li>
+
+</ol>
+
+</td></tr></tbody></table>
+
+</body><object id="fbfbaa98-eae9-979c-f92a-d9b23b8db7bb" width="0" height="0" type="application/gas-events-cef"></object></html>

@@ -1,0 +1,137 @@
+<html>
+<head>
+	<script src="assignment8.js"></script>
+	<script>
+	
+	//////////////////////////////////////////////////////////////////////
+	//  These are example test cases which will be changed by the grader!!
+
+	function recSumTest() {
+		var outStr = "Trying recSum(5) - correct answer is 15:<br>";
+		var out = recSum(5);
+		outStr += "Got answer: " + out + "<br>";
+		
+		outStr += "Trying recSum(20) - correct answer is 210:<br>";
+		out = recSum(20);
+		outStr += "Got answer: " + out + "<br>";
+
+		document.getElementById("recSumOut").innerHTML = outStr;
+	}
+	
+	function findMinTest() {
+		var outStr = "Trying findMin([100,4,23,42,2,49]) - correct answer is 2:<br>";
+		var out = findMin([100,4,23,42,2,49]);
+		outStr += "Got answer: " + out + "<br>";
+		
+		outStr += "Trying findMin([99]) - correct answer is 99:<br>";
+		out = findMin([99]);
+		outStr += "Got answer: " + out + "<br>";
+
+		document.getElementById("findMinOut").innerHTML = outStr;
+	}
+	
+	function reverseStringTest() {
+		var outStr = "Trying reverseString('blah') - correct answer is 'halb':<br>";
+		var out = reverseString("blah");
+		outStr += "Got answer: " + out + "<br>";
+		
+		outStr += "Trying reverseString('a string') - correct answer is 'gnirts a':<br>";
+		out = reverseString('a string');
+		outStr += "Got answer: " + out + "<br>";
+
+		document.getElementById("reverseStringOut").innerHTML = outStr;
+	}
+	
+	function applyToArrayTest() {
+		var outStr = "Trying applyToArray([1,2,3])(add2) - correct answer is [3,4,5]:<br>";
+		try {
+			var f = applyToArray([1,2,3]);
+			var out = f(add2);
+			outStr += "Got answer: " + out + "<br>";
+			
+			outStr += "Trying applyToArray([10,0,2])(mult4) - correct answer is [40,0,8]:<br>";
+			f = applyToArray([10,0,2]);
+			out = f(mult4);
+			outStr += "Got answer: " + out + "<br>";
+
+			document.getElementById("applyToArrayOut").innerHTML = outStr;
+		} catch (e) {
+			document.getElementById("applyToArrayOut").innerHTML = "Exception occurred: " + e;
+		}
+	}
+	
+	function getMaxTest() {
+		try {
+			var outStr = "Trying getMax(mult4,add2)(20) - correct answer is 80:<br>";
+			var f = getMax(mult4,add2);
+			var out = f(20);
+			outStr += "Got answer: " + out + "<br>";
+			
+			outStr += "Trying getMax(add2,square)(1) - correct answer is 3:<br>";
+			f = getMax(add2,square);
+			out = f(1);
+			outStr += "Got answer: " + out + "<br>";
+
+			document.getElementById("getMaxOut").innerHTML = outStr;
+		} catch (e) {
+			document.getElementById("getMaxOut").innerHTML = "Exception occurred: " + e;
+		}
+	}
+	
+	function makeClosureTest() {
+		try {
+			var outStr = "Calling makeClosure(add2)<br>";
+			var closure = makeClosure(add2);
+			var out = closure[1]();
+			outStr += "out is: " + out + ", and should be 2<br>";
+			closure[0](100);
+			out = closure[1]();
+			outStr += "out is: " + out + ", and should be 102<br>";
+			closure[0](99);
+			out = closure[1]();
+			outStr += "out is: " + out + ", and should be 102<br><br>";
+
+			outStr += "Calling makeClosure(mult4)<br>";
+			var closure = makeClosure(mult4);
+			var out = closure[1]();
+			outStr += "out is: " + out + ", and should be 0<br>";
+			closure[0](4);
+			out = closure[1]();
+			outStr += "out is: " + out + ", and should be 16<br><br>";
+
+			document.getElementById("makeClosureOut").innerHTML = outStr;
+		} catch (e) {
+			document.getElementById("makeClosureOut").innerHTML = "Exception occurred: " + e;
+		}
+	}
+
+	</script>
+</head>
+<body>
+	<h1>Test Page for Assignment 8</h1>
+	<p>
+		Click here to test the recSum function: <button onclick="recSumTest();">recSum!</button><br>
+		<div id="recSumOut"></div>
+	</p>
+	<p>
+		Click here to test the findMin function: <button onclick="findMinTest();">findMin!</button><br>
+		<div id="findMinOut"></div>
+	</p>
+	<p>
+		Click here to test the reverseString function: <button onclick="reverseStringTest();">reverseString!</button><br>
+		<div id="reverseStringOut"></div>
+	</p>
+	<p>
+		Click here to test the applyToArray function: <button onclick="applyToArrayTest();">applyToArray!</button><br>
+		<div id="applyToArrayOut"></div>
+	</p>
+	<p>
+		Click here to test the getMax function: <button onclick="getMaxTest();">getMax!</button><br>
+		<div id="getMaxOut"></div>
+	</p>
+	<p>
+		Click here to test the makeClosure function: <button onclick="makeClosureTest();">makeClosure!</button><br>
+		<div id="makeClosureOut"></div>
+	</p>
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/3530/mod_resource/content/1/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="620"><tbody><tr><td>
+
+<h1>Assignment 1</h1>
+
+<ol>
+	<li><b>Learn how to use terminal:</b> If you have never used a terminal window (a.k.a. command shell, a.k.a. console), spend a little time becoming familiar with it. In Windows, click on the logo button, and type in "cmd". In Linux, there is usually an obvious icon to open one, perhaps in the "accessories" menu. You should know how to use the "cd" command to change directories. You should also know how to use the "ls" command ("dir" on Windows) to list the contents of the current directory. It might help to Google for "how to use the windows command shell", or something like that.</li><br><br>
+
+	<li><b>Make sure you have a current version of the Java Development Kit (JDK) installed:</b><br>
+		Open a command shell or terminal. Enter this command:
+<pre class="shell">javac -version
+</pre>
+		If it prints something like this,
+<pre class="shell">javac 1.8.0-ea
+</pre>
+		then you already have a current version of the JDK installed. (Yay! Go to step 2.)
+		If "javac" is not a recognized command, then you need to install the JDK. If you have version 1.7, that should suffice for this class. If you have an earlier version, well, it might work.
+
+		<h3>If you use Ubuntu</h3>
+<pre class="shell">sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+</pre>
+			or Google for other ways to do it.
+		<h3>If you use Windows</h3>
+			<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Download and install it</a>. Get the JDK (Java Development Kit),
+			not the JRE (Java Runtime Environment). The JDK includes the compiler (javac). the JRE does not include the compiler. You don't need the
+			"Development Kit with Demos and Samples", just get the "Development Kit". Unless your computer is really old, you probably want the 64-bit version.
+		<h3>Then test to see if you did it right</h3>
+<pre class="shell">javac -version
+</pre>
+			If your command shell still cannot find javac, then you probably need to tweak your PATH environment variable to tell your computer
+			where javac is located. First, figure out where javac is located. (Where did you install it to? Find it.) Next, use Google to learn how to adjust the PATH environment variable on your operating system. Add the folder where javac is located to the list so your computer will be able to find it. (Make sure to <b>add</b> it do the list of directories instead of <b>replacing</b> the list!) Then, test it again.
+	</li><br><br>
+	
+	<li><b>Write a simple java program that counts from 0 to 99:</b> Open your favorite text editor. (For this step, please use a simple text editor, not
+	something integrated with the Java compiler. You will use an IDE in later steps, but I want you to prove that you can do it both ways.
+	On Linux, some good choices might be Kate, KWrite, GEdit, Leafpad, nano, pico, vi, or emacs. On Windows, Notepad or Notepad2 would be good.) Make a file
+	called Main.java with the following contents:
+<pre class="code">import java.io.PrintWriter;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		PrintWriter out = System.console().writer();
+		for(int i = 0; i &lt; 100; i++) {
+			out.println(i);
+		}
+	}
+}
+</pre>
+	</li><br><br>
+
+	<li><b>Compile it.</b>
+<pre class="shell">javac Main.java
+</pre>
+	(If you get a compiler error, fix it and compile again.)
+	Then, run your program.
+<pre class="shell">java Main
+</pre>
+	It should print
+<pre>0
+1
+2
+...
+97
+98
+99
+</pre>
+	Yay! You have now compiled a program in Java.
+	</li><br><br>
+
+	<li><b>Write a shell script</b> (or batch file, if you use Windows) that will compile and run your code: If you use Linux, make a
+		text file named build.bash with this content:
+<pre class="code">#!/bin/bash
+set -u -e
+javac Main.java
+java Main
+</pre>
+		(You do not really need to know what those first two lines do, but I will tell you anyway in case you want to know:
+		The first line, #!/bin/bash, tells it which shell language you are using. Linux supports many different shells. In
+		this case, we are using Bash, which is a popular choice. The second line, set -u -e, tells it to abort if any errors occur. If
+		it fails to compile, you probably do not want it to try to run an old version of the program--that could be confusing.
+		You should understand what lines 3 and 4 do, however.)<br>
+		Make your shell script executable with this command:
+<pre class="shell">chmod 755 build.bash
+</pre>
+		Then test it
+<pre class="shell">./build.bash
+</pre>
+		It should build your program and then run it. If it doesn't work, figure out why, and fix it. To make the output
+		easier to read, I like to make my build script print blank lines beween commands, like this:
+<pre class="code">#!/bin/bash
+set -u -e
+echo ""
+echo ""
+echo ""
+echo "Building..."
+javac Main.java
+echo ""
+echo ""
+echo ""
+echo "Running..."
+java Main
+</pre>
+	Now you have made a Bash script. If you use Windows, omit the first two lines from your script, and save it with the
+	extension ".bat" instead of ".bash". Also, on Windows, you do not need to specify "./" to execute a script in the current
+	folder because Windows looks in the current folder by default. So, you can execute your script with this command:
+<pre class="shell">build.bat
+</pre>
+	</li><br><br>
+
+	<li><b>Install Eclipse</b> (if it is not already installed). Eclipse is an Integrated Development Environment (IDE). Translation: Eclipse is a big
+	bloated tool that helps you write java programs. It is integrated with the Java compiler. It compiles in the background and instantly identifies
+	errors. It includs a debugger, and many tools that you will never use.<br>
+	If you use Ubuntu,
+<pre class="shell">sudo apt-get install eclipse
+</pre>
+		On my machine, Eclipse crashed when I ran it for the first time. I Googled for the solution, and found
+		<a href="http://stackoverflow.com/questions/10165693/eclipse-cannot-load-swt-libraries">this</a>.
+		The highly-rated solution worked for me.<br><br>
+		If you use Windows, Google for "eclipse download", and go from there.<br><br>
+		(The first time you run Eclipse, you will need to tell it where you want to store your work, and close an annoying "welcome" page.)
+	</li><br><br>
+
+	<li><b>Make a new project in Eclipse</b>:<br>
+		Click on "File-&gt;new-&gt;project". Choose "Java Project", and click "Next". Name your project "Assignment1". Click "Use default JRE". Click "Finish".
+	</li><br><br>
+
+	<li><b>Make a new class</b>: In the "Package Explorer" pane, right-click on "src", then click on "New-&gt;class". Name your class "Assignment1", and click "Finish". It
+		will make a file named "Assignment1.java" for you. Paste in this code (replacing any code already in that file):
+<pre class="code">import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class Assignment1 extends JFrame{
+    public Assignment1() throws Exception{
+        this.setTitle("Assignment 1");
+        this.setSize(400,300);
+        this.getContentPane().add(new JButton("Click"));
+        this.setVisible(true);
+    }
+
+    public static void main(String[] args) throws Exception{
+        new Assignment1();
+    }
+}
+</pre>
+	Save your changes (control-s).
+	</li><br><br>
+
+	<li><b>Run your program</b> by pressing the "play" button. (It is a round button with a green background and a white triangle.)
+	You should see a window titled "Assignment 1". The whole window is filled with a big button that says "Click". When you click it, nothing happens,
+	(except the button changes color to show that you are pressing it). Yay! Now you have used an IDE to make a program.
+	Knowing how to use an IDE will save you a lot of time later. Take a little time to explore Eclipse. (It is a big confusing
+	program, but you will probably have an easier time with it later if you preemptively look around a little bit while you do not yet have any
+	pressing deadlines.)
+	</li><br><br>
+
+	<li><b>Break free of the IDE:</b> Figure out where Eclipse put the source code. That is, find Assignment1.java.
+		Copy it into another folder (outside of the workspace folder used by Eclipse). Using a simple text editor, write a build script that
+		will compile and run this program. Test it in a shell or console window. It should work the very same without the IDE. Yay! Now you know how
+		to become independent of the IDE!  (Note that you may have to press Ctrl-C at the command line to kill the program.  This is because some code has been omitted for simplicity of the example.)
+	</li><br><br>
+
+	<li><b>Submit your code from step 9 to receive credit:</b> Delete Assignment1.class. Make a zip archive containing a folder with only your
+		source code (i.e. Assignment1.java) in it. On Linux, the command to make a zip file is:
+<pre class="code">zip -r -9 assignment1.zip src
+</pre>
+		This will create a zip file named "assignment1.zip" containing a folder named "src". If you don't know how to make a zip archive on
+		your favorite operating system, try using Google to find some instructions.<br><br>
+
+		The zip archive you submit should contain Assignment1.java and your build script. It should NOT contain any other files.
+		Before you submit your archive file, make sure it still works. Try unzipping your archive into another folder. Make sure it
+		contains only those two files, and no files with a ".class" extension. Run your script. Did
+		it work? If not, figure out what is wrong and fix it. If your code does not work, the grader will not debug it--that's your job.
+		Finally, browse to the course site on Moodle (<a href="https://moodle.csce.uark.edu/">https://moodle.csce.uark.edu/</a>) and submit your zip archive for Assignment1.
+	</li><br><br>
+	
+	<li>Here is the rubrick the grader will use, so make sure your code meets each of these requirements.  Please keep in mind that this is a very large class and the TA does not have time to fix your code, rename files, etc.:
+		<ol>
+			<li>Does the submission consist of a single zip file named assignment1.zip?  If not, deduct 20 points.</li>
+			<li>Does the zip file contain exactly Assignment1.java and build.bat (or build.bash)?  If not, deduct 20 points.</li>
+			<li>Does the build script have the correct commands to build and run the code?  If not, deduct 10 points.</li>
+			<li><b>Does the code compile? If not, give the student a 10%.</b></li>
+			<li>Does the Java program execute correctly.  If not, deduct 10 points.</li>
+		</ol>
+		</li><br><br>
+</ol>
+
+</td></tr></tbody></table>
+
+</body><object id="39587a1a-7b58-b9a4-7a39-ab9df989b49e" width="0" height="0" type="application/gas-events-cef"></object></html>

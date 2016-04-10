@@ -1,0 +1,113 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/5281/mod_resource/content/1/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="720"><tbody><tr><td>
+
+<h1>Assignment 5</h1>
+
+
+<ol>
+	<li>Download the "Razorbacks.zip" starter kit. Extract, build ("javac *.java") and run it ("java Controller"). You should see a blank window.  When  you click your mouse on the window the first time, 25 Razorbacks and 25 Reveilles (the Texas A&amp;M mascot) should appear.  Every subsequent click should cause them each to move in their own random directions, up to about 5 pixels. (As with the last assignment, if you get an exception saying it cannot find the file "razorback.png" or another image file, make sure you know what directory you are executing within. Here is a command to print the current working directory:
+<pre class="code">System.out.println("cwd=" + System.getProperty("user.dir"));
+</pre>
+		You should make sure that the image files are in that directory.
+		<br><br>
+
+	This code partially extends the code from the last assignment, while some aspects are re-written differently.  For instance, you'll notice that the classes Razorback and Opponent both extend Sprite, but that essentially all of the logic is contained within the Sprite class.  Also, the timer which automatically updated the scene is gone.</li><br><br>
+
+	<li>Modify the Sprite class by implementing the "overlaps" function to return true if any portion of the Sprite passed in as an argument overlaps the current Sprite.  You will need to use the x and y coordinates as well as the size of the Sprites.</li><br><br>
+	
+	<li>Modify the "forward" function in Model so that after a Sprite is moved, it is checked to see if it overlaps any other Sprite.  If so, and if one of them is a Razorback and the other an Opponent [HINT: use the "instanceof" operator], then the one that is an Opponent should have its image set to "gravestone.jpg".  Go Hogs!!  (If the gravestone is too morbid for you, you can change the image to something else, as long as it is clearly different. :-)</li><br><br>
+	
+	<li>Add a function "void hit()" to Sprite which changes the image to "gravestone.jpg", and modifies the necessary variables so that the Sprite will no longer move around the screen when move() is called.  Also, add a variable to the Sprite class that can be used to store whether or not the Sprite has been hit.  Now, in the "forward" function in Model, use this function to change the Sprite's image and cause it to stop moving.  Get this working before proceeding.</li><br><br>
+	
+	<li>Add necessary variables and/or functionality so that Sprite's "update" function, if the Sprite has been hit, increments a counter of how many times update has been called after the Sprite was hit. Also, add a function "boolean shouldRemove()" to Sprite which will return true if the that counter is &gt;= 20.</li><br><br>
+	
+	<li>Modify the "forward" function in Model so that it checks to see if a Sprite should be removed (using the above function), and if so, removes that Sprite from the collection.  Note that you will need to use an iterator for the sprites collection to safely remove elements while iterating over them (<a href="http://docs.oracle.com/javase/tutorial/collections/interfaces/collection.html">http://docs.oracle.com/javase/tutorial/collections/interfaces/collection.html</a>).  Otherwise, removing elements from a collection while you are iterating over it causes errors.  (Feel free to check it out!  It's great experience to intentionally cause bugs so you can observe the way that they are manifested and reported.)<br><br>
+	
+	Example use of an iterator:
+	<pre class="code">Iterator<sprite> iter = sprites.iterator();
+while (iter.hasNext()) {
+    Sprite s = iter.next();
+    ...
+</sprite></pre>
+		
+	</li><li>At this point, as you click the mouse the images should move around, and whenever a Reveille and a Razorback run into each other, the Reveille turns into a gravestone (which no loner continues to move around).  20 clicks after becoming a gravestone, a gravestone should disappear.  Get this much working before you proceed.</li><br><br>
+
+	<!--<li>Add a function to Model named "growRazorbacks" which takes no arguments and returns void, and which increases the size of each Razorback (not Opponents!) by 25.  [Hint: you will want to use the "instanceof" operator, and also the "getSize" and "setSize" methods of Sprite.]</li><br><br>-->
+
+	<li>To allow for a bit more control of the action, you are going to modify your application to respond to specific key presses. First, update the Controller class so that it implements the necessary interface for listening to keyboard events (note that in Java, although a class can only extend one other class, it is allowed to implement multiple interfaces).  (Use google or your book to figure out which interface that is and find the documentation for that interface.)  Then, correctly register the key listener with the View class so it knows what will be processing those events.  Note that the mouse listener was added to the JPanel subclass MyPanel, but to correctly process keyboard events the key listener must be registered with the JFrame subclass View.</li><br><br>
+	
+	<li>Make your key listener call the "initialize" function in Model when the key "r" is typed.  (If you want your window to automatically refresh after "initialize" is called, you can call "view.repaint()").  Note that you will need to modify the initialize function in Model so that all existing Sprites are discarded before adding new Sprites.<br><br>
+	At this point, you should be able to move the Sprites by clicking the mouse, collisions between Razorbacks and Opponents should cause the Opponent images to change, "hit" Opponents should disappear after 20 clicks, and the entire scene should be reset to a new random scene when "r" is pressed.  Get all of this working before proceeding.</li><br><br>
+	
+	<li>Time for multithreading!<br><br>For the final major addition, you are going to create a thread which will automatically update your scene (to save your fingers from all that clicking!).  Create a class named "SpriteMover" which implements the Runnable interface. The constructor should take a Controller and a View as arguments, which it stores in instance variables.  Other than the constructor, the only function which must be implemented is "public void run()".  This function should consist of an infinite loop (i.e. one that never terminates) and which causes the thread to sleep for 25 milliseconds at the end of each iteration.  Before sleeping, it should perform the same logic as the "forward" function in Model.  At the end of each outer loop iteration (before sleeping again) it should call "repaint" on the View object (this is what causes the screen to be refreshed and "update" to be called).  Sample code is below, with the assignment of the "sprite" variable and the contents of the "forward logic from Model" to be completed by you.  Make sure that you completely understand all lines of this sample code before using it!!!</li><br><br>
+	
+	<pre class="code">public void run() {
+    while (true) {
+        ArrayList<sprite> sprites = ?? // Figure out how to use the controller object to access the sprite list
+		
+        ... "forward" logic from Model here ...
+		
+        try {
+            Thread.sleep(25);
+        } catch (InterruptedException e) {}
+        view.repaint();
+    }
+</sprite></pre>
+
+	<li>To create and use a thread which uses your SpriteMover, in Controller create a new function "public void start()" which simply creates a new Thread, using a new SpriteMover as the necessary argument to the constructor.  Then, call "start()" on that thread object.  Update your keyTyped function to call Controller's "start" function when "s" is typed.</li><br><br>
+	
+	<li>Now for thread-safety!<br><br>If you run your program now, you should see that after typing "s" you get many exceptions of the type "java.util.ConcurrentModificationException".  This is because your ArrayList of sprites is being simultaneously accessed and modified by multiple threads:  your thread which moves them around, and the thread which handles the events (such as redrawing).  In order to fix this, ensure that every function which iterates over the ArrayList of Sprites synchronizes access to it by using a "synchronized" statement:
+	
+<pre class="code">synchronized(sprites)
+{
+    ... code to be synchronized here ...
+}
+</pre>
+
+This will ensure that if one thread is currently in a "synchronized" section which is accessing and/or modifying the ArrayList of Sprites, another thread will have to wait until the first thread is done before executing its "synchronized" section, providing thread-safety.  Once this is working, you're done!</li><br><br>
+
+	<li>Submit a zip file in the usual manner. The zip file should contain only your source files, image files, and a working build script which compiles your code and starts your application.
+		Do not submit any .class files, .jar files, or any other files. Test your zip file before you submit it by extracting into a separate folder and running your
+		build script. Remember that your classes should not be in a package other than the default package.</li><br><br>
+		
+	<li>
+	Here is the rubric the grader will use when running your program.  Make sure your code meets each of these requirements.  Please keep in mind that this is a very large class and the TA does not have time to fix your code, rename files, etc.:<br><br>
+	<ol>
+		<li>-90% Code does not compile</li>
+		<li>-20% Incorrect files contained in the zip file</li>
+		<li>-10% Build script does not correctly build and run your program</li>
+		<li>-20% When a Razorback collides with an Opponent, the image of the Opponent doesn't change</li>
+		<li>-10% When a Razorback collides with an Opponent, the image of the Opponent doesn't stop moving</li>
+		<li>-10% When a Razorback collides with an Opponent, the image of the Opponent does not disappear after 20 additional mouse clicks</li>
+		<li>-20% When "r" is typed, a new random scene does not appear, with the old images removed</li>
+		<li>-10% When "s" is typed, the scene doesn't begin moving on its own</li>
+		<li>-10% When "s" is typed, there are exceptions occurring (especially "java.util.ConcurrentModificationException")</li>
+		<li>-20% A Thread object is not being created in the Controller using the SpriteMover class</li>
+	</ol>
+	</li>
+
+
+</ol>
+
+</td></tr></tbody></table>
+
+</body><object id="38ebb988-b978-9f9c-396b-caaba8b587bc" width="0" height="0" type="application/gas-events-cef"></object></html>

@@ -1,0 +1,62 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/5784/mod_resource/content/1/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="720"><tbody><tr><td>
+
+<h1>Assignment 7</h1>
+
+
+<ol>
+	<li>For this assignment, you will be creating an HTML page with JavaScript functions and classes which mimic the functionality of your assignments 2 and 3.  That is, you will be creating Exam, Coursework, and Student classes which can be used to compute the final course letter grade and percentage score for a student in a hypothetical class.  You must write your page "by hand", meaning that you are not allowed to use an HTML editor or application which writes HTML for you, and all code should be contained within a single file, which is the only file you will submit.</li><br><br>
+
+	<li>Create a file named FirstLast.html (where "First" is replaced with your first name and "Last" with your last name).  Create a title for your page (using the "title" tag) and a main heading (using the "h1" tag) with the text "First Last's Assignment 7" (again substituting your name).</li><br><br>
+	
+	<li>Other than the heading, your page should only display a form which requests the student's data.  The form should contain 8 text input fields and one "Submit" button.  The input fields should request:<ol><li>first name</li><li>last name</li><li>a comma separated list of homework scores (e.g. "90,80,98")</li><li>a comma separated list of activity scores</li><li>a midterm exam percentage score (e.g. "91")</li><li>a midterm exam letter grade (e.g. "A")</li><li>a final exam percentage score</li><li>a final exam letter grade</li></ol>There should be text next to each input field specifying which data to enter into it.  Note:  For easier testing, you can set your input text fields to have default test values, and obviously these will be changed by the grader when grading.</li><br><br>
+	
+	<li>Set your form so that when the submit button is pressed, a JavaScript function named "calculateGrade" is called.  Hint:  Use the "onsubmit" attribute of the form as follows:   onsubmit="return calculateGrade()".  Also, make sure that your "calculateGrade" function always returns false.  This will prevent the browser from "submitting" the form and then reloading the page after the submit button is pressed.  Make your "calculateGrade" function do something basic like call alert and display data from the form (the name entered, etc.) to ensure that you've got everything working up to this point.  Don't continue until you do.</li><br><br>
+	
+	<li>Create JavaScript classes Exam, Coursework, and Student which have the same attributes and methods as those classes did in assignment 2.  They should be structured the same (e.g. the Student class should contain 2 Exam and 2 Coursework objects). Further, all attributes of each class should be "private" and the methods should all be "priveleged" (see <a href="http://javascript.crockford.com/private.html">http://javascript.crockford.com/private.html</a> for details).</li><br><br>
+	
+	<li>Modify "calculateGrade" so that it gathers all of the necessary data from the form and uses it to create a Student object and set all necessary score and grade values.  Have it call alert with the string returned by the "getGrade" method of the Student class.  Make sure this is working before continuing (including the correct arithmetic for computing final letter grades along with any relevant curves, etc.).</li><br><br>
+
+	<li>Make one more set of modifications to "calculateGrade" so that instead of displaying the student's grade in an alert popup, it prints that information to the HTML page.  The heading should remain visible on the page, but the entire form should now be hidden.  Thus, when the page is loaded and the student's information is added into the form and then the submit button is pushed, the form should disappear and the correct grade for the student should be displayed instead (in the format specified for assignment 2, i.e. "Final course grade for First Last is: X (yy%)").  Don't worry about rounding the percentage score to two decimal places or about the spacing on your page, meaning that it doesn't matter where the output information about the student is located, as long as the form is not visible and the heading is.</li><br><br>
+
+	<li>Here is the rubrick the grader will use, so make sure your page meets each of these requirements:
+		<ol>
+			<li>(-20 points) If anything other than a single, uncompressed HTML file was submitted.</li>
+			<li>(5 points) Does the HTML file have the correct name?</li>
+			<li>(5 points) Does the page have the correct title?</li>
+			<li>(5 points) Does the page have the correct heading?</li>
+			<li>(15 points) Is the form correctly displayed with all necessary fields (and descriptions of the data to enter next to each) and one button?</li>
+			<li>(10 points) Does clicking on the button cause the form to disappear?</li>
+			<li>(10 points) Does clicking on the button cause text to appear which gives the student's name, grade, and score?</li>
+			<li>(10 points) Is the score computed correctly for all test cases?</li>
+			<li>(10 points) Is the grade computed correctly for all test cases?</li>
+			<li>(20 points) Does the JavaScript code correctly define and make use of Exam, Coursework, and Student classes?</li>
+			<li>(10 point) Are the attributes of classes "private" and the methods "privileged"?</li>
+		</ol>
+		</li><br><br>
+
+	<li>Submit a single HTML file in the usual manner. It should not be zipped or in a compressed file.  Test your file before you submit it by copying it to a new folder and opening it in your Chrome web browser from that folder. Ensure that it works as expected.</li><br><br>
+</ol>
+
+</td></tr></tbody></table>
+
+</body><object id="0ab97a58-ea2a-9c92-3a58-6886dba8b589" width="0" height="0" type="application/gas-events-cef"></object></html>

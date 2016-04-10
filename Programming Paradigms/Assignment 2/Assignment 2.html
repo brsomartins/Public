@@ -1,0 +1,117 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/3533/mod_resource/content/1/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="720"><tbody><tr><td>
+
+<h1>Assignment 2</h1>
+
+<p>In this assignment, you will create a Java program containing three classes named Exam, Coursework, and Student. These classes will be used to compute a student's final course grade (for an imaginary course).</p>
+
+<ol>
+	<li>The Exam class represents the percentage (score) and letter grade (grade) received for an exam. It must:
+		<ul>
+			<li>have a private instance variable that keeps track of an integer score</li>
+			<li>have a private instance variable that keeps track of a letter grade (as a string)</li>
+			<li>have a constructor which takes two arguments, an int and a String, which are used to populate the instance variables (due to possible curves for exam scores, the integer score may not match the typical letter grade)</li>
+			<li>have ``get'' functions to get the score and grade</li>
+			<li>ensure that scores are between 0 and 100 (if a score less than 0 is used, it should be rounded up to 0, if a score greater than 100 is used it should be rounded down to 100)</li>
+			<li>ensure that the letter grade is either A, B, C, D, or F. If a value other than those is used, a warning message should be printed to the console that an invalid grade was entered, and the value ``F'' should be used.</li>
+		</ul>
+	</li><br><br>
+	
+	<li>The Coursework class represents the combined scores for a collection of similar work such as homework or in-class activities. It must:
+		<ul>
+			<li>have a private instance variable that keeps track of the total (sum) of the scores</li>
+			<li>have a private instance variable that keeps track of the number of scores that have been totaled</li>
+			<li>have a function that allows you to add a score. (Don't forget to ensure the score falls between 0 and 100.)</li>
+			<li>have a function that returns the average of the scores as a double</li>
+		</ul>
+	</li><br><br>
+	
+	<li>The Student class represents a student and is used to for entering grades and computing and printing the final course grade. It must:
+		<ul>
+			<li>have a private instance variable that keeps track of the student's first name as a string (and one for the last name)</li>
+			<li>have a private instance variable of type Exam that keeps track of the student's midterm exam score and grade (and one for the final exam)</li>
+			<li>have a private instance variable of type Coursework that keeps track of the student's homework total (and one for in-class activities)</li>
+			<li>have a constructor which takes 2 String arguments, one for the first name and one for the last name (in that order)</li>
+			<li>have the following member functions (implemented):<br>
+<pre>		public void setMidterm(int score, String grade)
+		public void setFinal(int score, String grade)
+		public void addGradedHomework(int score)
+		public void addGradedActivity(int score)
+		public void printGrade()
+</pre>
+			</li><li>printGrade() should calculate and output the student's final course grade as follows:<br>
+<pre>	The weighted course percentage should be computed as follows:
+		(activity average * 15%) +
+		(homework average * 25%) +
+		(midterm score * 25%) +
+		(final score * 35%)
+	Based on the weighted course percentage, a letter grade should be computed as:
+		F (&lt;60), D (&#8805;60, &lt;70), C (&#8805;70, &lt;80), B (&#8805;80, &lt;90), A (&#8805;90)
+
+</pre>
+	Follow the formula strictly (i.e. a score of 79.88% is a C and doesn't round to 80% and a B).
+		</li></ul>
+	</li><br><br>
+	
+	<li>To make it more interesting, let's say the professor thought that performance on the exams was low, so he curved them so that the percentages for exams don't necessarily align with the letter grades for them (i.e. the letter grade given for an exam may not match the percentage score following the typical grading scale). Additionally, since the exams were difficult, he decided that no student's final course letter grade would be lower than the lowest letter grade they received on an exam. Therefore, if their weighted percentage for the course would have earned them a letter grade which is lower than the letter grade of their lowest exam, their letter grade for the course should be adjusted upward to match that of their lowest exam grade.  (Note that in Java, when you want to compare the <b>contents</b> of two String objects, instead of using "==" you should use the "compareTo" method provided by the String class!)
+	</li><br><br>
+
+	<li>The student's full name along with their final letter grade and weighted percentage (between 0 and 100, rounded to exactly two
+		decimal places) must be output to the console. The output line must begin with "Final course grade for" and then include the
+		student's name, letter grade, and percentage.
+	</li><br><br>
+
+	<li>Test your work. An example class named StudentTest.java is provided (on the course site along with assignment 2) to help you test your code.
+		Your classes must work with it, i.e. they must all compile correctly together and StudentTest.java should work correctly when executed. However, when grading we will use more and/or different test cases, so you should also test
+		various additional cases. Do not submit StudentTest.java. Here is the output that my implementation gives with this file:
+<pre class="shell">Final course grade for Matt Patitz C 79.88%
+Final course grade for John Johnson B 70.92%
+You have submitted a bad grade for an Exam, value of:G.
+Final course grade for Foo Fooson D 63.42%
+Final course grade for Fake Student B 67.42%
+</pre>
+		Note that if your values are within a few hundredths of a percent, that is sufficient.
+		</li><br><br>
+
+	<li>Submission: You must submit a zip archive containing exactly these files: Student.java, Coursework.java, Exam.java, and a working build script named build.bat (or build.bash) which compiles your code (but doesn't execute it). Do not submit any files other than a single archive containing these four, and be sure it contains exactly these four.</li><br><br>
+
+<li>
+Here is the rubric the grader will use when running your code with a different version of a file similar to StudentTest.java, so make sure your code meets each of these requirements.  Please keep in mind that this is a very large class and the TA does not have time to fix your code, rename files, etc.:
+<ol>
+	<li>-90%:      user files do not compile on their own</li>
+	<li>-50%:      StudentTest.java does not compile with submitted files (but user submitted files compile on their own)</li>
+	<li>-20%:      wrong files submitted (but compilation works, which means that one of them must at least have been Student.java)</li>
+	<li>-35%:      Student class does not use instances of Exam and Coursework classes</li>
+	<li>-5% each:  incorrect final grade</li>
+	<li>-5% each:  incorrect final score</li>
+	<li>-5% each:  does not replace out of bounds score</li>
+	<li>-5%:       does not warn when invalid letter grade is input</li>
+	<li>-5%:       output for each student does not begin with "Final course grade for"</li>
+	<li>-5%:       output does not contain student's full name</li>
+	<li>-5%:       output does not display score as a value between 0-100 with two decimal places</li>
+	<li>-10%:      does not promote letter grade to lowest exam grade</li>
+</ol>
+</li>
+
+</ol></td></tr></tbody></table>
+
+</body><object id="188bda6b-ab48-9785-19aa-db9a8b9a909e" width="0" height="0" type="application/gas-events-cef"></object></html>

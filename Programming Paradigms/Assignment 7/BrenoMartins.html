@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Grades</title>
+		<script type="text/javascript">
+			function calculateGrade() {
+				s = new Student(document.getElementById("firstName").value, document.getElementById("lastName").value);
+				s.setMidterm(document.getElementById("midtermPercentage").value, document.getElementById("midtermLetter").value);
+				s.setFinal(document.getElementById("finalPercentage").value, document.getElementById("finalLetter").value);
+
+				homeworks = document.getElementById("homeworkScore").value.split(',');
+
+				for (i = 0; i < homeworks.length; i++) {
+					s.addGradedHomework(parseInt(homeworks[i]));
+				};
+
+				activities = document.getElementById("activityScore").value.split(',');
+
+				for (i = 0; i < activities.length; i++) {
+					s.addGradedActivity(parseInt(activities[i]));
+				};
+
+				var form = document.getElementById("form");
+				form.style.display = "none";
+
+				document.getElementById("result").innerHTML = s.getGrade();
+
+				return false;
+			}
+
+			function Exam(Score, Grade) {
+				var score;
+				var grade;
+
+				if (Score < 0) {
+					score = 0;
+				} else if (Score > 100) {
+					score = 100;
+				} else {
+					score = Score;
+				}
+
+				if (Grade == "A" || Grade == "B" || Grade == "C" || Grade == "D" || Grade == "F") {
+					grade = Grade;
+				} else {
+					Grade = "F";
+					console.log("You have submitted a bad grade for an Exam, value of: " + Grade);
+				}
+
+				this.getScore = function() {
+					return score;
+				}
+
+				this.getGrade = function() {
+					return grade;
+				}
+			}
+
+			function Coursework() {
+				var sum = 0;
+				var number = 0;
+				
+				this.addScore = function(score) {
+					if (score < 0) {
+						sum += 0;
+					} else if (score > 100) {
+						sum += 100;
+					} else {
+						sum += score;
+					}
+					
+					number++;
+				}
+				
+				this.getScoresAvg = function() {
+					return sum / number;
+				}
+			}
+
+			function Student(firstName, lastName) {
+				var firstName = firstName;
+				var lastName = lastName;
+				var midtermExam;
+				var finalExam;
+				var homework = new Coursework();
+				var inClass = new Coursework();
+
+				this.setMidterm = function(score, grade) {
+					midtermExam = new Exam(score, grade);
+				}
+
+				this.setFinal = function(score, grade) {
+					finalExam = new Exam(score, grade);
+				}
+
+				this.addGradedHomework = function(score) {
+					homework.addScore(score);
+				}
+
+				this.addGradedActivity = function(score) {
+					inClass.addScore(score);
+				}
+
+				this.getGrade = function() {
+					percentage = inClass.getScoresAvg() * 0.15 + homework.getScoresAvg() * 0.25
+							+ midtermExam.getScore() * 0.25 + finalExam.getScore() * 0.35;
+					lowest = (midtermExam.getGrade().localeCompare(finalExam.getGrade()) > 0 ? midtermExam.getGrade()
+							: finalExam.getGrade());
+					grade = "F";
+
+					if (percentage < 60) {
+						grade = "F";
+					} else if (percentage >= 60 && percentage < 70) {
+						grade = "D";
+					} else if (percentage >= 70 && percentage < 80) {
+						grade = "C";
+					} else if (percentage >= 80 && percentage < 90) {
+						grade = "B";
+					} else {
+						grade = "A";
+					}
+
+					return ("Final course grade for " + firstName + " " + lastName + " is: " + (grade.localeCompare(lowest) > 0 ? lowest : grade) + " (" + percentage + "%)");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Breno Martins' Assignment 7</h1>
+		<form id="form" style="display: block" onsubmit="return calculateGrade();">
+			First name: <input type="text" id="firstName" value="Matt"><br>
+			Last name: <input type="text" id="lastName" value="Patitz"><br>
+			Homework scores: <input type="text" id="homeworkScore" value="90,95"><br>
+			Activity scores: <input type="text" id="activityScore" value="100,70"><br>
+			Midterm percentage: <input type="text" id="midtermPercentage" value="78"><br>
+			Midterm letter: <input type="text" id="midtermLetter" value="B"><br>
+			Final percentage: <input type="text" id="finalPercentage" value="70"><br>
+			Final letter: <input type="text" id="finalLetter" value="C"><br>
+			<input type="submit"><br>
+		</form>
+		<p id="result"></p>
+	</body>
+</html>

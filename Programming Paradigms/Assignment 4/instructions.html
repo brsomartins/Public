@@ -1,0 +1,77 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/4975/mod_resource/content/1/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="720"><tbody><tr><td>
+
+<h1>Assignment 4</h1>
+
+
+<ol>
+	<li>Download the "turtle.zip" starter kit. Extract, build ("javac *.java") and run it ("java Controller"). You should see a turtle. When you click somewhere in the window, the turtle slowly travels toward the spot where you clicked.<br><br>
+		If you get an exception saying it cannot find the file "turtle.png", make sures
+		you know what directory you are executing within. Here is a command to print the current working directory:
+<pre class="code">System.out.println("cwd=" + System.getProperty("user.dir"));
+</pre>
+		You should make sure that the image file is in that directory..
+		</li><br><br>
+
+	<li>This code uses a "Model-View-Controller" architecture. This is a good general structure for many programs. Specifically, it is
+	usually a good idea to keep your views and your models well-separated. Examine the code and see how much of it you can understand.</li><br><br>
+
+	<li>Modify the Model class to store an ArrayList of Turtles. Make Model.update call Turtle.update for each Turtle in the ArrayList. To test it, put two or three turtles in the ArrayList, each starting in different
+	locations. When you click (which causes "setDestination" to be called), make all of the turtles head for the same destination. Get this much working before you proceed.</li><br><br>
+		
+	<li>Make the dest_x and dest_y variables for the Turtle class into static variables, since all Turtle object instances will share the same destination.  Also, make the setDest function static and make sure that it is correctly called from Model.</li><br><br>
+
+	<li>Make an <b>abstract</b> class called "Sprite", which stores an (x,y) position, and a reference to an Image. The constructor of your Sprite class should take 2
+	int parameters (to specify the initial x and y position), and a string which is the name of the file to load the image from, and it should load the image (instead of the Turtle class loading the image).  It will need a getter function for the image.  Make an abstract method in your Sprite class named "public void update(Graphics g)".  This function should have no body.  The purpose of this is to ensure that any class which inherits from this class implements an update function.</li><br><br>
+		
+	<li>Make your Turtle class inherit from Sprite. (The (x,y) position and image reference should no longer be stored in the Turtle class, but in the Sprite class.) Make the Turtle constructor call the Sprite constructor to correctly load the image.  (Note that your Turtle constructor will now also take an x and y value to pass along to the Sprite constructor.)  Modify the ArrayList in your Model to be an ArrayList&lt;Sprite&gt; instead of ArrayList&lt;Turtle&gt;. Get this much working before you proceed.</li><br><br>
+
+	<li>In the Model class, change "setDestination" to use a java.util.Random object to generate a random x coordinate between 0 and the value of the width parameter, and a random y coordinate between 0 and the height parameter.  It should then create a new Turtle at the point (x,y) and add it to the ArrayList of Sprites.  No longer create any Turtles initially, but only have them created when the user clicks the mouse (i.e. when "setDestination" is called).</li><br><br>
+
+	<li>Make another class called "Razorback", which also extends Sprite. (A razorback image is included in the starter kit for convenience.) Don't pick random values for its initial position--instead, Razorbacks will always start where you click.  The constructor should also take two int parameters for the width and the height of the window.  It should generate two numbers between -5 and 5, xSlope and ySlope, and each time the Razorback moves it should move by a distance of xSlope to the right (or left if that value is negative) and ySlope down (or up if that value is negative).  If a Razorback reaches the edge of the screen in one direction, it should reappear on the other side.  (For example, if it is moving left and its x coordinate becomes negative, it should be set to the x coordinate of the right side of the screen, which is the width.)</li><br><br>
+
+	<li>Start your program with no Sprites on the screen. Each time you single-click the mouse, add a new Sprite to the model. Alternate between Turtles and Razorbacks. The first time, add a Turtle. The second time, add a Razorback. The third time, add a Turtle, and so forth.  Each time that a Turtle is added, it appears in a random location and the point of the click becomes the new destination for all Turtles, and each time a Razorback is added the point of the click is the location at which it is added.  You can download and run the sample solution in Assignment4-example-solution.zip for an example.  Simply download the zip file, unzip it, and from the directory with the unzipped files run the command "java Controller".</li><br><br>
+
+	<li>Your model.update method should iterate over the Sprites in the ArrayList. Note that when you call Sprite.update(), it will actually call Turtle.update() or Razorback.update(), depending on the type of Sprite. This is polymorphism.</li><br><br>
+
+	<li>Submit a zip file in the usual manner. The zip file should contain your source files, image files, and a working build script, and no other files.  Your build script should build and run your program.  The only included source files should be: Controller.java, Model.java, Razorback.java, Sprite.java, Turtle.java, and View.java.  The image files should be: turtle.png and razorback.png. Do not submit any other files (including .class files). Test your zip file before you submit it by extracting into a separate folder and running your build script. Remember that your classes should not be in a package (other than the default package, which requires no "package" statement in your source).</li><br><br>
+
+	<li>
+	Here is the rubric the grader will use when running your program.  Make sure your code meets each of these requirements.  Please keep in mind that this is a very large class and the TA does not have time to fix your code, rename files, etc.:<br><br>
+	<ol>
+	<li>-90% Code does not compile</li>
+	<li>-20% Incorrect files contained in the zip file</li>
+	<li>-20% Build script does not correctly build and run your program</li>
+	<li>-20% A new Turtle or Razorback does not appear each time you click, alternating each time you click</li>
+	<li>-15% Turtles don't start at random locations and converge to the point of click</li>
+	<li>-15% Razorbacks don't start where you click, then travel in random slopes</li>
+	<li>-10% Razorbacks don't wrap around from one edge of the screen to another</li>
+	<li>-10% The ArrayList in the Model class doesn't use generics. (That is, it doesn't use an ArrayList&lt;Sprite&gt;, instead of just an ArrayList)</li>
+	<li>-10% The code doesn't use polymorphism. (That is, the Model.update() method doesn't call an abstract Sprite.update() method.)</li>
+	</ol>
+	</li>
+
+</ol>
+
+</td></tr></tbody></table>
+
+</body><object id="da2879aa-5b6a-97b6-bb79-2b93db94b3a2" width="0" height="0" type="application/gas-events-cef"></object></html>

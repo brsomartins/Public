@@ -1,0 +1,73 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/5990/mod_resource/content/1/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="720"><tbody><tr><td>
+
+<h1>Assignment 9</h1>
+
+
+<ol>
+	<li>For this assignment, you will be creating a basic PHP page which outputs a simple HTML page. You may do initial testing and development on the virtual machine as discussed in the "Instructions for running your own virtual machine for PHP Page" document.  However, final development and testing must be on the department's Turing server.  See <a href="http://pausch.ddns.uark.edu/?page_id=55">here</a> for instructions on how to set up your web site on Turing.  (You may want to make a subdirectory within your main web directory for your test pages.)
+	</li><br>
+
+	<li>Create a file named assignment9.php.<br><br>
+	You can create and edit your page:
+		<ol><li>On your virtual machine for initial development and testing, and then transfer the file using FileZilla to Turing for final testing.  (FileZilla can be found under "Applications" -&gt; "Internet" on the virtual machine after you have executed the command "sudo apt-get install filezilla", and you can use it to connect to Turing using your university login and password.)</li>
+		<li>Directly on Turing (as described <a href="http://pausch.ddns.uark.edu/?page_id=55">here</a> by using an editor such as `vi')</li>
+		<li>On your local machine using a basic text editor, and then upload it to Turing by using SFTP or SCP to connect to the server turing.csce.uark.edu with your university login and password</li>
+		<li>(For Macs) Remotely on Turing but on a drive that you have mapped to your local machine, as described here <a href="http://pausch.ddns.uark.edu/?page_id=110">here for Mac machines</a>.</li></ol>
+		From this point, it will be assumed that you are correctly placing your file in the necessary folder on Turing and then accessing it via the appropriate URL for testing.<br><br>Note that the permissions for your file must be set so that everyone can "read" the file. For example, this can be done if you ssh to Turing, "cd" to the correct directory, and run "chmod 600 assignment9.php".</li><br>
+	
+	<li>Your page must check to see if the value of a particular global variable named "$_REQUEST" is null and generate the following HTML page if it is:<ul>
+		<li>The title is "Assignment 9: no query string"</li>
+		<li>The body contains the following 3 lines at the top: "Hello world!", "firstname lastname's assignment 9.", and "The query string is null."</li>
+		<li>The page should end with a call to the PHP function "phpinfo()"</li>
+		</ul>
+		and the following page if it is not:<ul>
+		<li>The title is "Assignment 9: with a query string"</li>
+		<li>The body contains the following 3 lines at the top: "Hello world!", "firstname lastname's assignment 9.", and "The query string is " + var_dump($_REQUEST)</li>
+		<li>The page should end with a call to the PHP function "phpinfo()"</li></ul>
+	You must replace "firstname" with your first name and "lastname" with your last name.  For the line that ends with "var_dump($_REQUEST)", you must call the PHP function var_dump() on the $_REQUEST variable and cause the result to be displayed at the end of the line (however is appropriate depending on how you are outputting the line).</li><br>
+
+	<li>An example can be found here:<ul>
+		<li>No query string:<a href="http://csce.uark.edu/~patitz/assignment9.php">http://csce.uark.edu/~patitz/assignment9.php</a></li>
+		<li>With query string:<a href="http://csce.uark.edu/~patitz/assignment9.php?test=true">http://csce.uark.edu/~patitz/assignment9.php?test=true</a></li>
+		</ul>
+	</li><br>
+
+	<li>Here is the rubrick the grader will use, so make sure your page meets each of these requirements <b>when run on Turing</b>:<p></p>
+		<ol>
+			<li>(10 points) Does the PHP file have the correct name?</li>
+			<li>(15 points) Does the page display content with no visible PHP error (exception) when no query string is used?</li>
+			<li>(15 points) Does the page display content with no visible PHP error (exception) when a query string is used?</li>
+			<li>(5 points) Does the page display the lines "hello world" and "firstname lastname's assignment 9" when no query string is used?</li>
+			<li>(5 points) Does the page display the lines "hello world" and "firstname lastname's assignment 9" when a query string is used?</li>
+			<li>(20 points) Is the title correctly set based on whether or not a query string is used?</li>
+			<li>(20 points) Is the correct value (null or var_dump($_REQUEST)) of the query string displayed?</li>
+			<li>(10 points) Is the PHP environment (i.e. the output of phpinfo()) always displayed?</li>
+		</ol>
+		</li><br><br>
+
+	<li>Submit your file in the usual manner. You should submit only your "assignment9.php" file, it should not be in a compressed folder.  Your PHP page must work correctly on Turing for credit, regardless of whether or not it works on another system.</li><br><br>
+</ol>
+
+</td></tr></tbody></table>
+
+</body><object id="8bb968ab-c8d8-adaf-e94b-39a1dba19185" width="0" height="0" type="application/gas-events-cef"></object></html>

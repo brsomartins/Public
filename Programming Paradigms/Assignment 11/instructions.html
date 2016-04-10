@@ -1,0 +1,71 @@
+
+<!-- saved from url=(0089)https://moodle.csce.uark.edu/pluginfile.php/6110/mod_resource/content/1/instructions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+<style type="text/css"></style></head>
+<body bgcolor="#d0d0b0"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e0e0c0" width="720"><tbody><tr><td>
+
+<h1>Assignment 11</h1>
+
+
+<ol>
+	<li>For this assignment, you will be creating a PHP page which manages a set of user accounts.  It will allow users to create accounts, log in, manage account settings, and log out.  It will use a text file on the server to keep track of user account information.  An example solution can be found here:<a href="http://csce.uark.edu/~patitz/assignment11.php">http://csce.uark.edu/~patitz/assignment11.php</a>. <b>[[NOTE: Keep in mind that the example page can be accessed by multiple people simultaneously, and therefore accounts can be created and modified while you are using the page, possibly causing unexpected behavior.  You do not need to worry about that occurring during the testing of your web page as the grader will be the only person accessing a separate copy, so your page should work correctly and as expected.]]</b>  All code must be contained within a single file named "assignment11.php", and the account information must be contained in a file named "assignment11-account-info.txt" which resides in the same directory as the PHP page (and which you will not turn in).  Furthermore, note that it is not necessary to have any JavaScript form validation for this assignment.</li><br>
+
+	<li>When a user initially visits your page, the title and main heading for the page should say "Welcome to FIRSTNAME LASTNAME's Assignment 11 PHP page!" (with your name correctly substituted).  It should display one form which allows a user to login if he/she has an existing account (with a user name field and a password field), and a second form which allows a user to create a new account (with a user name field, a password field, a first name field, and a last name field).  Both forms should submit to the same page (assignment11.php) and should use the "get" method.</li><br>
+
+	<li>If the user attempts to log in and submits a username and a password pair which exist in the "assignment11-account-info.txt" file, a new session should be created which keeps track of the user's settings (which are read from that file).  The user's settings should be used to generate the title and heading for the page (which should be the same as each other), the background color of the page, and the URL of an image to be displayed.  There should be a "Logout" button, and also another form which displays the 5 settings which can be edited:  first name, last name, background color, page title, and image URL.  The fields of the form should be filled in by default with the current settings for the user.</li><br>
+	
+	<li>If the username and password entered in the initial page are invalid (either the user does not exist or an incorrect password is given), an error message should be displayed and the original page with the two initial forms should be displayed.</li><br>
+	
+	<li>When a user is logged in, if he/she opens a new browser window and types in the URL of the page, they should go directly to their "personalized" page (which uses their title, background color, and image) since their session should still be active.</li><br>
+	
+	<li>When a user hits the "Logout" button from their personalized page, their session should be destroyed and they should only see the initial page until they login again.</li><br>
+	
+	<li>When a user modifies any of the settings on the form of the personalized page and submits that form, the new values should be stored in the entry of the assignment11-account-info.txt file corresponding to their settings (correctly replacing the old settings), and the personalized page should once again be displayed but with all relevant changes (any changes to the page itself as well as the default values in the form for editing settings).</li><br>
+	
+	<li>If the user is not logged in and fills out the form to create a new account, if any fields are left blank an error message should be displayed and the initial page should be displayed again.  (This should be done by the PHP, and no JavaScript should be used.)  If all fields are filled in, but the user name used is one which already exists in the assignment11-account-info.txt file, an error message should be displayed which says that user name is taken, and the initial page should be displayed again.  If all fields are filled in and the user name doesn't already exist in assignment11-account-info.txt, a new entry should be made in that file for the new user (and default values for extra settings as shown below should be used), and the user should become logged in and the personalized page displayed.<br>Default settings:
+	<ul>
+		<li>title = Welcome to FIRSTNAME LASTNAME's Assignment 11 PHP page!</li>
+		<li>background color = white</li>
+		<li>Image url = http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png</li>
+	</ul>
+	</li><br>
+
+	<li>The file assignment11-account-info.txt should be a text file, with each line containing all of the settings for a single account.  The settings should be separated by semi-colons and in the following order:  user name;password;first name;last name;background color;title;image URL.  See http://csce.uark.edu/~patitz/assignment11-account-info.txt or http://csce.uark.edu/~patitz/assignment11-account-info-backup.txt for examples which you can download and use.  Your PHP page must work correctly when the contents from the file at http://csce.uark.edu/~patitz/assignment11-account-info-backup.txt is used within a local version of assignment11-account-info.txt, since that is the file that will initially be used for testing (and accounts will then be created and modified).</li><br>
+
+	<li>Here is the rubrick the grader will use, so make sure your page meets each of these requirements when run on Turing and assuming starting with a copy of the assignment11-account-info.txt file whose contents come from http://csce.uark.edu/~patitz/assignment11-account-info-backup.txt:<p></p>
+		<ol>
+			<li>(10 points) Does the page initially display the correct title and two forms (login and account creation)?</li>
+			<li>(15 points) If an existing user logs in, the personalized page is displayed (with correct title, background color, and image).</li>
+			<li>(10 points) If a new browser window is opened and pointed at the correct URL for the web page (with no query string data), the user is still logged in.</li>
+			<li>(10 points) When a logged in user logs out, the initial page is correctly displayed until they log in again.</li>
+			<li>(5 points) When a user is logged in, the form which allows them to edit their settings is correctly pre-populated.</li>
+			<li>(10 points) When a logged in user changes one of their settings and submits the form, the page is correctly updated.</li>
+			<li>(10 points) When a logged in user changes one of their settings and submits the form, the information is correctly stored in the account info file so that the next time they log in, the new values are read.</li>
+			<li>(10 points) When a user attempts to create a new account but either uses an existing user name or leaves a field blank, an informative error message (one intentionally created by the php page, not an error by the web server) is displayed and the initial page is still displayed.</li>
+			<li>(10 points) When a user attempts to create a new account and all of the information is filled in and the user name is unique, a new account is created and the user is logged in with the appropriately personalized page displayed.</li>
+			<li>(10 points) When the user of a newly created accounts logs out, they are able to correctly log back in.  Also, previously existing users can still log in and their settings are still correct.</li>
+		</ol>
+		</li><br><br>
+
+	<li>Submit your file in the usual manner. You should submit only your "assignment11.php" file, it should not be in a compressed folder.  Your PHP page must work correctly on Turing for credit, regardless of whether or not it works on another system.  It must also work with the assignment11-account-info.txt file copied from http://csce.uark.edu/~patitz/assignment11-account-info-backup.txt.</li><br><br>
+</ol>
+
+</td></tr></tbody></table>
+
+</body><object id="8b2a8a3a-b839-9482-5858-c9967ab4bdb4" width="0" height="0" type="application/gas-events-cef"></object></html>
